@@ -7,7 +7,7 @@
 from linecode import linecodexe
 
 # add the path of your LineCode file
-linecodexe(r"./my_code.lcd")
+linecodexe(r"./my_code.linecode")
 
 
 
