@@ -224,7 +224,7 @@ def linecode(line):
 
         if code[i] == 'r':
             try:
-                var_values[code[i+1]] = set_type(var_types[code[i+1]],input(': '))
+                var_values[code[i+1]] = set_type(var_types[code[i+1]],input(code[i+1]+': '))
             except:
                 assert False, "\n  <LineCode Error Systeme>\n   Input Error\n   Expected '" + var_types[code[i+1]] + "' type input"
             i += 2
@@ -271,4 +271,15 @@ def linecode(line):
             print("----------------------")
             i += 1
 
+
+def linecodexe(file_path):
+    with open(file_path, 'r') as file:
+        lines = file.readlines()
+        file.close()
+    if len(lines) == 1:
+        code = lines[0]
+    else:
+        code = lines[0][:-1]
+    linecode(code)
+    
 
