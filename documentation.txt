@@ -168,3 +168,32 @@ The special character prefix s is used to get the characters space (with s) and 
 
 The type of "ss" or "sl" is a chararcter (c)
 
+
+
+
+ --- OPERATIONS ---
+
+The operations expects one or two arguments placed AFTER the operation symbol
+ -> Example: +n12n13 for 12+13
+
+List of the operations expecting two arguments:
++ Addition
+- Sustraction
+* Product
+/ division
+^ power
+% modulo
+= equality
+< smaller than
+> bigger than
+& boolean and
+| boolean or
+
+List of the operations expecting only one argument:
+_ Inverse     (same as *(-1) )
+~ Round
+\ Square Root
+! Boolean not
+t Type        (return the type of the argument)
+
+
