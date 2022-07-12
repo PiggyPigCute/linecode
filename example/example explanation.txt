@@ -1,0 +1,53 @@
+
+
+ --- GOAL OF THE CODE ---
+
+The code used in the example is used to found the discriminant and the solutions of a second-degree polynomial function
+
+
+
+
+ --- MATHEMATICAL REMINDERS ---
+
+A second-degree polynomial function is function in the form f(x) = ax² + bx + c
+ (the example code ask the values of a, b and c)
+
+The discriminant (or Δ) is the number equal to b²-4ac
+ (the code calculate this number)
+
+The solution of the equation f(x) = 0 have zero, one or two solutions:
+
+If Δ > 0:
+ - the equation have two solutions (-b-√Δ)/2a and (-b+√Δ)/2a
+
+If Δ = 0:
+ - the equation juste have one solution -b/2a
+
+If Δ < 0:
+ - the equation don't have any solution
+
+
+
+
+ --- PYTHON EQUIVALENT PROGRAM ---
+
+
+a = int(input("a ?")
+b = int(input("b ?")
+c = int(input("c ?")
+
+delta = b**2-4*a*c
+
+print("∆ =", delta)
+
+if delta > 0:
+  print("x1 =", (-b-delta**0.5)/2a )
+  print("x2 =", (-b+delta**0.5)/2a )
+if delta == 0:
+  print("x =", -b/2a )
+if delta < 0:
+  print("aucune solution")
+  
+  
+  
+  
