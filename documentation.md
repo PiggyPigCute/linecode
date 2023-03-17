@@ -7,7 +7,7 @@
 - `s`: set   (set the value of a variable)
 - `c`: cond  (equivalent of a "if")
 
-`+g`: debug command
++ `g`: debug command
 
 ## THE WRITE FUNCTION (w)
 
