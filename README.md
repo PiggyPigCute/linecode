@@ -1,8 +1,8 @@
 
- --- LineCode ---
- 
-The LineCode is the project of programing language in one line
+# LineCode
 
-This language don't have any space, line break, indent, any type of delimiters, brackets, quotes, any type of 'end command'...
+The **LineCode** is the project of programing language in **one line**
 
- -> see an example in linecode/example/
+This language don't have any **space**, **line break**, indent, **any type of delimiters**, brackets, quotes, any type of 'end command'...
+
+ -> See an (example)[./linecode/example]
