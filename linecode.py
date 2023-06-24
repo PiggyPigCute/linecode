@@ -203,8 +203,10 @@ def linecode(line):
 
     global var_values
     global var_types
+    global labels
     var_values = {}
     var_types = {}
+    labels = {}
 
 
     i = 0
@@ -212,7 +214,7 @@ def linecode(line):
 
 
     while (i<len(code)-1):
-        assert code[i] in "wrvscg", "\n  <LineCode Error Systeme>\n   Error char "+str(i)+": '"+ code[i] + "'\n   Expected a command (in 'wrvsc')"
+        assert code[i] in "wrvscltg", "\n  <LineCode Error Systeme>\n   Error char "+str(i)+": '"+ code[i] + "'\n   Expected a function (in 'wrvsc')"
 
         if code[i] == 'w':
             k = get_number(i+1)
@@ -246,29 +248,62 @@ def linecode(line):
             i += 1+a[2]
             assert code[i] != 'c', "\n  <LineCode Error Systeme>\n   Error char "+str(i)+": 'c'\n   conditionnal command (c) can't affect another conditionnal command (c <condition> c <condition> <command> it's impossible)"
             if not(a[1]):
-                assert code[i] in "wrvs", "\n  <LineCode Error Systeme>\n   Error char "+str(i)+": '"+ code[i] + "'\n   Expected a command (in 'wrvs') after the condition function (c)"
+                assert code[i] in "wrvsltg", "\n  <LineCode Error Systeme>\n   Error char "+str(i)+": '"+ code[i] + "'\n   Expected a function (in 'wrvsltg') after the condition function (c)"
                 if code[i] == 'w':
                     k = get_number(i+1)
                     i += 1+k[1]
                     for j in range(k[0]):
                         a = calc(i)
                         i += a[2]
-                if code[i] == 'r':
+                elif code[i] == 'g':
+                    i += 1
+                elif code[i] == 'r':
                     i += 2
-                if code[i] == 'v':
+                elif code[i] == 'v':
                     i += 3
-                if code[i] == 's':
+                elif code[i] == 's':
                     a = calc(i+2)
                     i += 2 + a[2]
+                else: # l or t
+                    a = calc(i+1)
+                    i += 1 + a[2]
+        
+        if code[i] == 'l':
+            a = calc(i+1)
+            assert a[0] == 'n', "\n  <LineCode Error Systeme>\n   Error char "+str(i+1)+": '"+ code[i+1:i+1+a[2]] + "'\n   Expected a 'n' type value next the 'label' function (l)\n   '" + a[0] + "' type value given"
+            i += 1+a[2]
+            labels[a[1]] = i
+        
+        if code[i] == 't':
+            a = calc(i+1)
+            assert a[0] == 'n', "\n  <LineCode Error Systeme>\n   Error char "+str(i+1)+": '"+ code[i+1:i+1+a[2]] + "'\n   Expected a 'n' type value next the 'go to' function (t)\n   '" + a[0] + "' type value given"
+            assert a[1] in labels, "\n  <LineCode Error Systeme>\n   Error char "+str(i)+": '"+ code[i:i+1+a[2]] + "'\n   The Label "+str(a[1])+" doesn't exist"
+            i = labels[a[1]]
+
+
         
         if code[i] == 'g':
-            print("--- g Values Table ---")
-            for j in var_types.keys():
-                if j in var_values.keys():
-                    print(j,var_types[j],var_values[j])
+            novars = (len(var_types) == 0)
+            nolabels = (len(labels) == 0)
+            if novars and nolabels:
+                print("┌───────────────────────┐")
+                print("│ g Debug is empty      │")
+                print("│  (no vars, no labels) │")
+            if not(novars):
+                print("┌─── Vars Type Value ───┐")
+                for j in var_types.keys():
+                    if j in var_values.keys():
+                        print('│',j,var_types[j],var_values[j],(16-len(str(var_values[j])))*' ','│')
+                    else:
+                        print('│',j,var_types[j],"unset             │")
+            if not(nolabels):
+                if novars:
+                    print("┌─── Labels Position ───┐")
                 else:
-                    print(j,var_types[j],"unset")
-            print("----------------------")
+                    print("├─── Labels Position ───┤")
+                    for j in labels.keys():
+                        print('│',j,labels[j],(20-len(str(j))-len(str(labels[j])))*' '+'│')
+            print("└───────────────────────┘")
             i += 1
 
 
