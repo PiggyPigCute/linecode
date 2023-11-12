@@ -15,7 +15,7 @@ The write function can write several values to the user.
 
 The fisrt argument of the write function is a raw number. This number indicate the number of values printed.
 
-> Example: `w3n12sscs!` print "12 !" (who have three elements: the number 12 (n12), the special character space (ss) and the chararcter "!" (cs))
+> Example: `w3n12ssc!` print "12 !" (who have three elements: the number 12 (n12), the special character space (ss) and the chararcter "!" (c!))
 
 The values can be of any type
 
