@@ -232,6 +232,7 @@ def linecode(line):
             i += 2
 
         if code[i] == 'v':
+            assert code[i+2] in "nudct", "\n  <LineCode Error Systeme>\n   Error char "+str(i+2)+": '" + code[i:i+3] + "'\n   the type '" + code[i+2] + "' doesn't exist, the 'variable' function (v) needs a type in 'nudct'"
             var_types[code[i+1]] = code[i+2]
             i += 3
 
